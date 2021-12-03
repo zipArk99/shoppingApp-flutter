@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/main.dart';
+import 'package:shop/screens/user_screen.dart';
 import 'package:shop/screens/your_orders_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -46,6 +47,20 @@ class DrawerScreen extends StatelessWidget {
             ),
             title: const Text(
               "Your Orders",
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(contx)
+                  .pushReplacementNamed(UserScreen.userScreenRoute);
+            },
+            leading: Icon(
+              Icons.supervised_user_circle,
+              size: 30,
+            ),
+            title: const Text(
+              "User",
               style: TextStyle(fontSize: 17),
             ),
           )

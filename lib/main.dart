@@ -4,6 +4,7 @@ import 'package:shop/models/cartitem_model.dart';
 import 'package:shop/models/your_orders.dart';
 import 'package:shop/screens/cart_total_screen.dart';
 import 'package:shop/screens/product_detail_screen.dart';
+import 'package:shop/screens/user_screen.dart';
 import 'package:shop/screens/your_orders_screen.dart';
 import 'package:shop/widgets/badeg.dart';
 import 'package:shop/widgets/products_provider.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
               ProductDetailScreen(),
           CartTotalScreen.CartTotalScreenRoute: (contx) => CartTotalScreen(),
           YourOrderScreen.yourOrderScreenRoute: (contx) => YourOrderScreen(),
+          UserScreen.userScreenRoute: (contx) => UserScreen(),
         },
       ),
     );
