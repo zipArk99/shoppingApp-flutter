@@ -14,7 +14,9 @@ class Product with ChangeNotifier {
       required this.price,
       required this.imageUrl,
       required this.productDescription,
-      this.isFavorite = false});
+      this.isFavorite = false}) {
+    print("Product constructor called");
+  }
 
   void setIsFavorite() {
     isFavorite = !isFavorite;

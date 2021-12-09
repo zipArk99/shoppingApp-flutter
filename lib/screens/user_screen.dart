@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/products_model.dart';
 import 'package:shop/screens/drawer._screen.dart';
-import 'package:shop/widgets/products_provider.dart';
+import 'package:shop/screens/edit_product_screen.dart';
+import 'package:shop/models/products_provider.dart';
 import 'package:shop/widgets/user_product_item.dart';
 
 class UserScreen extends StatelessWidget {
@@ -16,7 +17,10 @@ class UserScreen extends StatelessWidget {
         title: Text("User"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(contx)
+                  .pushNamed(EditProductScreen.EditProductScreenRoute);
+            },
             icon: Icon(Icons.add),
           ),
         ],
@@ -27,6 +31,7 @@ class UserScreen extends StatelessWidget {
             children: [
               UserProductItem(
                 productTitle: product.productList[index].title,
+                id: product.productList[index].id,
                 imageUrl: product.productList[index].imageUrl,
                 productPrice: product.productList[index].price,
               ),
