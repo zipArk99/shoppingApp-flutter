@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'products_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ProductsProvider with ChangeNotifier {
   List<Product> _productsList = [
@@ -57,15 +59,35 @@ class ProductsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addProduct(Product product) {
-    var prod = Product(
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        imageUrl: product.imageUrl,
-        productDescription: product.productDescription);
-    _productsList.insert(0, prod);
-    notifyListeners();
+  Future<void> addProduct(Product product) async {
+    try {
+      final url = Uri.https(
+          'flutter-shop-1c708-default-rtdb.firebaseio.com', '/products.json');
+
+      final response = await http.post(
+        url,
+        body: json.encode(
+          {
+            'title': product.title,
+            'price': product.price,
+            'imageUrl': product.imageUrl,
+            'productDescription': product.productDescription,
+            'isFavorite': product.isFavorite
+          },
+        ),
+      );
+
+      var prod = Product(
+          id: json.decode(response.body)['name'],
+          title: product.title,
+          price: product.price,
+          imageUrl: product.imageUrl,
+          productDescription: product.productDescription);
+      _productsList.insert(0, prod);
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 
   List<Product> get onlyIsFavoriteFun {
