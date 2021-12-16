@@ -41,8 +41,14 @@ class _YourOrdersItemState extends State<YourOrdersItem> {
                 children: [
                   ...widget.order.order.map((element) {
                     return ListTile(
-                      leading: Text(element.title),
-                      trailing: Text("\$${element.price}"),
+                      leading: Text(element.title + ""),
+                      title: Text(
+                        element.price.toString() +
+                            "X" +
+                            element.quantity.toString(),
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      trailing: Text("\$${element.price * element.quantity}"),
                     );
                   }),
                 ],

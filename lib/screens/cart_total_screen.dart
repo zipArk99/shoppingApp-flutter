@@ -39,19 +39,22 @@ class CartTotalScreen extends StatelessWidget {
                     backgroundColor: Theme.of(contx).primaryColor,
                   ),
                   TextButton(
-                    onPressed: () {
-                      if (!cart.checkEmpty) {
-                        yourOrder.addYourOrder(
-                            DateTime.now().toString(),
-                            cart.total,
-                            cart.item.values.toList(),
-                            DateTime.now());
-
-                        cart.emptyCart();
-                      } else {
-                        print("Empty Cart");
-                      }
-                    },
+                    onPressed: cart.item.length == 0
+                        ? null
+                        : () {
+                            if (!cart.checkEmpty) {
+                              yourOrder
+                                  .addYourOrder(
+                                cart.total,
+                                cart.item.values.toList(),
+                              )
+                                  .then((value) {
+                                cart.emptyCart();
+                              });
+                            } else {
+                              print("Empty Cart");
+                            }
+                          },
                     child: Text("Order Now"),
                   ),
                 ],

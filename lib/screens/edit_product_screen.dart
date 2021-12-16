@@ -62,7 +62,7 @@ class EditProductScreenState extends State<EditProductScreen> {
 
     if (_initValue['id'] != null) {
       print("product id:::::" + _initValue['id'].toString());
-      product.editProduct(_editedProduct, _initValue['id'].toString());
+      await product.editProduct(_editedProduct, _initValue['id'].toString());
       Navigator.of(contx).pop();
     } else {
       try {

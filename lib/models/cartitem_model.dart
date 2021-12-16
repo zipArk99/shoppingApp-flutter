@@ -11,6 +11,13 @@ class CartItem {
       required this.title,
       required this.price,
       required this.quantity});
+
+  Map toJson() => {
+        'CartItemId': cartItemId,
+        'title': title,
+        'price': price,
+        'quantity': quantity,
+      };
 }
 
 class Cart with ChangeNotifier {

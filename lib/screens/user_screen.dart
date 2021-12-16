@@ -8,6 +8,7 @@ import 'package:shop/widgets/user_product_item.dart';
 
 class UserScreen extends StatelessWidget {
   static const userScreenRoute = "/UserScreenRoute";
+
   @override
   Widget build(BuildContext contx) {
     ProductsProvider product = Provider.of<ProductsProvider>(contx);

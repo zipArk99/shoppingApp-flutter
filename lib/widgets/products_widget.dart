@@ -57,7 +57,13 @@ class ProductsWidget extends StatelessWidget {
                     ? Icons.favorite
                     : Icons.favorite_border_sharp),
                 onPressed: () {
-                  singleProduct.setIsFavorite();
+                  singleProduct.setIsFavorite().catchError((error) {
+                    ScaffoldMessenger.of(contx).showSnackBar(
+                      SnackBar(
+                        content: Text("Change Unsuccessful"),
+                      ),
+                    );
+                  });
                 },
               ),
             ),

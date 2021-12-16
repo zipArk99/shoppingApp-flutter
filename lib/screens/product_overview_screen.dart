@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/cartitem_model.dart';
+import 'package:shop/models/products_provider.dart';
 import 'package:shop/screens/drawer._screen.dart';
 import 'package:shop/widgets/badeg.dart';
 import 'package:shop/widgets/products_gridview.dart';
@@ -14,6 +15,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _onlyFavorite = false;
+  var _isInit = true;
+  var loadingSpinner = false;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        loadingSpinner = true;
+      });
+      Provider.of<ProductsProvider>(context).fetchData().then((value) {
+        setState(() {
+          loadingSpinner = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   Widget build(BuildContext contx) {
     var cart = Provider.of<Cart>(
@@ -59,6 +78,8 @@ class _HomePageState extends State<HomePage> {
           ],
           title: Text("Apni Dukan"),
         ),
-        body: ProductsGridView(_onlyFavorite));
+        body: loadingSpinner
+            ? Center(child: CircularProgressIndicator())
+            : ProductsGridView(_onlyFavorite));
   }
 }
